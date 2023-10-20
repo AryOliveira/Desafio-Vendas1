@@ -47,7 +47,8 @@ public class Program {
 					.reversed())
 					.limit(5)
 					.toList();
-
+			
+			System.out.println();
 			System.out.println("Cinco primeiras vendas de 2016 de maior preço médio:");
 			sales2016.forEach(System.out::println);
 
@@ -56,9 +57,9 @@ public class Program {
 			
 			Double totalLogan = list.stream()
 					.filter(x -> x.getSeller().equals("Logan"))
-					.filter(x -> x.getMonth() >= 1 && x.getMonth() <= 7) 
-				    //filter(x -> x.getYear() == 2016) 
-					.mapToDouble(Sale::getTotal).sum();					
+					.filter(x -> x.getMonth() == 1 || x.getMonth() == 7) 
+				    .map(x -> x.getTotal())
+				    .reduce(0.0, (x,y) -> x + y);
 			
 			System.out.println();
 			System.out.println("Valor total vendido por Logan nos meses 1 e 7 =  " + String.format("%.2f", totalLogan));
